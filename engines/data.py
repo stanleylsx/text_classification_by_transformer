@@ -7,6 +7,7 @@
 import numpy as np
 import tensorflow as tf
 import os
+import jieba
 from tqdm import tqdm
 from engines.utils.clean_data import filter_word
 from config import classifier_config
@@ -17,9 +18,8 @@ class DataManager:
 
     def __init__(self, logger):
         self.logger = logger
-        self.embedding_method = classifier_config['embedding_method']
-        self.w2v_util = Word2VecUtils(logger)
-        self.stop_words = self.w2v_util.get_stop_words()
+        self.token_level = classifier_config['token_level']
+        self.stop_words = self.get_stop_words()
 
         self.embedding_dim = classifier_config['embedding_dim']
         self.token_file = classifier_config['token_file']
@@ -40,6 +40,28 @@ class DataManager:
 
         self.logger.info('dataManager initialed...')
 
+    @staticmethod
+    def processing_sentence(x, stop_words):
+        cut_word = jieba.cut(str(x).strip())
+        if stop_words:
+            words = [word for word in cut_word if word not in stop_words and word != ' ']
+        else:
+            words = list(cut_word)
+            words = [word for word in words if word != ' ']
+        return words
+
+    @staticmethod
+    def get_stop_words():
+        stop_words_path = classifier_config['stop_words']
+        stop_words_list = []
+        try:
+            with open(stop_words_path, 'r', encoding='utf-8') as stop_words_file:
+                for line in stop_words_file:
+                    stop_words_list.append(line.strip())
+        except FileNotFoundError:
+            return stop_words_list
+        return stop_words_list
+
     def load_vocab(self, sentences=None):
         if not os.path.isfile(self.token_file):
             self.logger.info('vocab files not exist, building vocab...')
@@ -57,7 +79,7 @@ class DataManager:
     def build_vocab(self, token_file, sentences):
         word_tokens = []
         for sentence in tqdm(sentences):
-            words = self.w2v_util.processing_sentence(sentence, self.stop_words)
+            words = self.processing_sentence(sentence, self.stop_words)
             word_tokens.extend(words)
         # 根据词频过滤一部分频率极低的词，不加入词表
         count_dict = Counter(word_tokens)
@@ -96,7 +118,7 @@ class DataManager:
         self.logger.info('loading data...')
         X, y = [], []
         for record in tqdm(zip(sentences, labels)):
-            sentence = self.w2v_util.processing_sentence(record[0], self.stop_words)
+            sentence = self.processing_sentence(record[0], self.stop_words)
             sentence = self.padding(sentence)
             label = tf.one_hot(record[1], depth=self.max_label_number)
             word_tokens = []
@@ -128,7 +150,7 @@ class DataManager:
         :param sentence:
         :return:
         """
-        sentence = self.w2v_util.processing_sentence(sentence, self.stop_words)
+        sentence = self.processing_sentence(sentence, self.stop_words)
         sentence = self.padding(sentence)
         word_tokens = []
         for word in sentence:

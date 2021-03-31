@@ -7,31 +7,29 @@
 
 
 # [train_classifier, interactive_predict, save_model]
-mode = 'interactive_predict'
+mode = 'train_classifier'
 
 classifier_config = {
     # 模型选择
     'classifier': 'textcnn',
     # 训练数据集
-    'train_file': 'data/data/train_data.csv',
-    # 引入外部的词嵌入,可选word2vec、Bert
-    # 此处只使用Bert Embedding,不对其做预训练
-    # None:使用随机初始化的Embedding
-    'embedding_method': 'word2vec',
+    'train_file': 'data/train_data.csv',
+    # 验证数据集
+    'dev_file': 'data/dev_data.csv',
     # 不外接词向量的时候需要自定义的向量维度
     'embedding_dim': 300,
     # 存放词表的地方
-    'token_file': 'data/data/token2id',
-    # 验证数据集
-    'dev_file': 'data/data/dev_data.csv',
+    'token_file': 'data/token2id',
     # 类别和对应的id
     'classes': {'negative': 0, 'positive': 1},
+    # 停用词(可为空)
+    'stop_words': 'data/w2v_data/stop_words.txt',
     # 模型保存的文件夹
-    'checkpoints_dir': 'model/word2vec_textcnn',
+    'checkpoints_dir': 'checkpoints/tran',
     # 模型保存的名字
-    'checkpoint_name': 'word2vec_textcnn',
-    # 卷集核的个数
-    'num_filters': 64,
+    'checkpoint_name': 'tran',
+    # token粒度
+    'token_level': 'word',
     # 学习率
     'learning_rate': 0.001,
     # 训练epoch
@@ -42,16 +40,15 @@ classifier_config = {
     'print_per_batch': 20,
     # 是否提前结束
     'is_early_stop': True,
-    # 是否引入attention
-    # 注意:textrcnn不支持
-    'use_attention': False,
-    # attention大小
-    'attention_size': 300,
     'patient': 8,
     'batch_size': 64,
     'max_sequence_length': 150,
+    # Encoder的个数
+    'encoder_num': 2,
     # 遗忘率
     'dropout_rate': 0.5,
+    # 多头注意力的个数
+    'head_num': 5,
     # 隐藏层维度
     # 使用textrcnn中需要设定
     'hidden_dim': 200,
