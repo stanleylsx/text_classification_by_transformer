@@ -29,7 +29,6 @@ class MultiHeadAttention:
     def __init__(self, embedding_dim, dropout_rate):
         super(MultiHeadAttention, self).__init__()
         self.head_num = classifier_config['head_num']
-        self.batch_size = classifier_config['batch_size']
         self.head_dim = embedding_dim // self.head_num
         self.W_Q = tf.keras.layers.Dense(self.head_dim * self.head_num, use_bias=False)
         self.W_K = tf.keras.layers.Dense(self.head_dim * self.head_num, use_bias=False)
@@ -38,6 +37,7 @@ class MultiHeadAttention:
         self.layer_norm = tf.keras.layers.LayerNormalization(epsilon=1e-6)
         self.dropout = tf.keras.layers.Dropout(dropout_rate)
 
+    @tf.function
     def scaled_dot_product_attention(self, query, key, value):
         scale = self.head_dim ** -0.5
         key = tf.transpose(key, [0, 2, 1])
@@ -47,19 +47,20 @@ class MultiHeadAttention:
         attention = tf.matmul(attention, value)
         return attention
 
-    # @tf.function
-    def call(self, inputs):
+    @tf.function
+    def call(self, inputs, training):
+        batch_size = inputs.shape[0]
         query = self.W_Q(inputs)
         key = self.W_K(inputs)
         value = self.W_V(inputs)
 
-        query = tf.reshape(query, [self.batch_size * self.head_num, -1, self.head_dim])
-        key = tf.reshape(key, [self.batch_size * self.head_num, -1, self.head_dim])
-        value = tf.reshape(value, [self.batch_size * self.head_num, -1, self.head_dim])
+        query = tf.reshape(query, [batch_size * self.head_num, -1, self.head_dim])
+        key = tf.reshape(key, [batch_size * self.head_num, -1, self.head_dim])
+        value = tf.reshape(value, [batch_size * self.head_num, -1, self.head_dim])
         z = self.scaled_dot_product_attention(query, key, value)
-        z = tf.reshape(z, [self.batch_size, -1, self.head_dim * self.head_num])
+        z = tf.reshape(z, [batch_size, -1, self.head_dim * self.head_num])
         z = self.W_O(z)
-        dropout_output = self.dropout(z)
+        dropout_output = self.dropout(z, training)
         output = dropout_output + inputs
         output = self.layer_norm(output)
         return output
@@ -74,27 +75,26 @@ class FeedForward:
         self.dropout = tf.keras.layers.Dropout(dropout_rate)
         self.layer_norm = tf.keras.layers.LayerNormalization(epsilon=1e-6)
 
-    # @tf.function
-    def call(self, inputs):
+    @tf.function
+    def call(self, inputs, training):
         output = self.dense1(inputs)
         output = self.dense2(output)
-        dropout_output = self.dropout(output)
+        dropout_output = self.dropout(output, training)
         output = dropout_output + inputs
         output = self.layer_norm(output)
         return output
 
 
 class Encoder:
-
     def __init__(self, embedding_dim, dropout_rate):
         super(Encoder, self).__init__()
         self.attention = MultiHeadAttention(embedding_dim, dropout_rate)
         self.feed_forward = FeedForward(embedding_dim, dropout_rate)
 
-    # @tf.function
-    def call(self, inputs):
-        attention_outputs = self.attention.call(inputs)
-        output = self.feed_forward.call(attention_outputs)
+    @tf.function
+    def call(self, inputs, training):
+        attention_outputs = self.attention.call(inputs, training)
+        output = self.feed_forward.call(attention_outputs, training)
         return output
 
 
@@ -102,16 +102,22 @@ class Transformer(tf.keras.Model, ABC):
     """
     Transformer模型
     """
-
-    def __init__(self, vocab_size, embedding_dim, seq_length):
+    def __init__(self, vocab_size, embedding_dim, seq_length, num_classes):
         super(Transformer, self).__init__()
         dropout_rate = classifier_config['dropout_rate']
-        self.embedding = tf.keras.layers.Embedding(vocab_size, embedding_dim, mask_zero=True)
+        encoder_num = classifier_config['encoder_num']
+        self.embedding = tf.keras.layers.Embedding(vocab_size+1, embedding_dim, mask_zero=True)
         self.positional_encoder = PositionalEncoding(embedding_dim, seq_length)
-        self.encoder = Encoder(embedding_dim, dropout_rate)
+        self.encoders = [Encoder(embedding_dim, dropout_rate) for _ in range(encoder_num)]
+        self.dense = tf.keras.layers.Dense(num_classes, activation='softmax')
+        self.flatten = tf.keras.layers.Flatten(name='flatten')
 
-    # @tf.function
+    @tf.function
     def call(self, inputs, training=None):
         embed_inputs = self.embedding(inputs)
-        position_embed = self.positional_encoder.call(embed_inputs)
-        attention_output = self.encoder.call(position_embed)
+        output = self.positional_encoder.call(embed_inputs)
+        for encoder in self.encoders:
+            output = encoder.call(output, training)
+        output = self.flatten(output)
+        output = self.dense(output)
+        return output

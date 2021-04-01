@@ -10,13 +10,11 @@
 mode = 'train_classifier'
 
 classifier_config = {
-    # 模型选择
-    'classifier': 'textcnn',
     # 训练数据集
     'train_file': 'data/train_data.csv',
     # 验证数据集
     'dev_file': 'data/dev_data.csv',
-    # 不外接词向量的时候需要自定义的向量维度
+    # 向量维度
     'embedding_dim': 300,
     # 存放词表的地方
     'token_file': 'data/token2id',
@@ -25,13 +23,13 @@ classifier_config = {
     # 停用词(可为空)
     'stop_words': 'data/w2v_data/stop_words.txt',
     # 模型保存的文件夹
-    'checkpoints_dir': 'checkpoints/tran',
+    'checkpoints_dir': 'checkpoints/model',
     # 模型保存的名字
-    'checkpoint_name': 'tran',
+    'checkpoint_name': 'model',
     # token粒度
     'token_level': 'word',
     # 学习率
-    'learning_rate': 0.001,
+    'learning_rate': 0.005,
     # 训练epoch
     'epoch': 30,
     # 最多保存max_to_keep个模型
@@ -50,8 +48,7 @@ classifier_config = {
     # 多头注意力的个数
     'head_num': 5,
     # 隐藏层维度
-    # 使用textrcnn中需要设定
-    'hidden_dim': 200,
+    'hidden_dim': 300,
     # 若为二分类则使用binary
     # 多分类使用micro或macro
     'metrics_average': 'binary',

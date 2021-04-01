@@ -11,7 +11,7 @@ import tensorflow as tf
 from tqdm import tqdm
 from engines.utils.focal_loss import FocalLoss
 from engines.utils.metrics import cal_metrics
-from engines.models.transformer import Transformer
+from engines.transformer import Transformer
 from config import classifier_config
 
 tf.keras.backend.set_floatx('float32')
@@ -44,24 +44,22 @@ def train(data_manager, logger):
     epoch = classifier_config['epoch']
 
     max_to_keep = classifier_config['max_to_keep']
-    # print_per_batch = classifier_config['print_per_batch']
-    # is_early_stop = classifier_config['is_early_stop']
-    # patient = classifier_config['patient']
+    print_per_batch = classifier_config['print_per_batch']
+    is_early_stop = classifier_config['is_early_stop']
+    patient = classifier_config['patient']
 
-    # classifier = classifier_config['classifier']
-    #
-    # reverse_classes = {str(class_id): class_name for class_name, class_id in data_manager.class_id.items()}
-    #
-    # best_f1_val = 0.0
-    # best_at_epoch = 0
-    # unprocessed = 0
+    reverse_classes = {str(class_id): class_name for class_name, class_id in data_manager.class_id.items()}
+
+    best_f1_val = 0.0
+    best_at_epoch = 0
+    unprocessed = 0
     batch_size = data_manager.batch_size
-    # very_start_time = time.time()
-    # loss_obj = FocalLoss() if classifier_config['use_focal_loss'] else None
-    # optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
-    #
+    very_start_time = time.time()
+    loss_obj = FocalLoss() if classifier_config['use_focal_loss'] else None
+    optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+
     # 载入模型
-    model = Transformer(vocab_size, embedding_dim, seq_length)
+    model = Transformer(vocab_size, embedding_dim, seq_length, num_classes)
 
     checkpoint = tf.train.Checkpoint(model=model)
     checkpoint_manager = tf.train.CheckpointManager(
@@ -75,70 +73,70 @@ def train(data_manager, logger):
             X_train_batch, y_train_batch = batch
             with tf.GradientTape() as tape:
                 logits = model.call(X_train_batch, training=1)
-    #             if classifier_config['use_focal_loss']:
-    #                 loss_vec = loss_obj.call(y_true=y_train_batch, y_pred=logits)
-    #             else:
-    #                 loss_vec = tf.keras.losses.categorical_crossentropy(y_true=y_train_batch, y_pred=logits)
-    #             loss = tf.reduce_mean(loss_vec)
-    #         # 定义好参加梯度的参数
-    #         gradients = tape.gradient(loss, model.trainable_variables)
-    #         # 反向传播，自动微分计算
-    #         optimizer.apply_gradients(zip(gradients, model.trainable_variables))
-    #         if step % print_per_batch == 0 and step != 0:
-    #             predictions = tf.argmax(logits, axis=-1).numpy()
-    #             y_train_batch = tf.argmax(y_train_batch, axis=-1).numpy()
-    #             measures, _ = cal_metrics(y_true=y_train_batch, y_pred=predictions)
-    #             res_str = ''
-    #             for k, v in measures.items():
-    #                 res_str += (k + ': %.3f ' % v)
-    #             logger.info('training batch: %5d, loss: %.5f, %s' % (step, loss, res_str))
-    #
-    #     # validation
-    #     logger.info('start evaluate engines...')
-    #     y_true, y_pred = np.array([]), np.array([])
-    #     loss_values = []
-    #
-    #     for dev_batch in tqdm(dev_dataset.batch(batch_size)):
-    #         X_val_batch, y_val_batch = dev_batch
-    #         logits = model.call(X_val_batch)
-    #         val_loss_vec = tf.keras.losses.categorical_crossentropy(y_true=y_val_batch, y_pred=logits)
-    #         val_loss = tf.reduce_mean(val_loss_vec)
-    #         predictions = tf.argmax(logits, axis=-1)
-    #         y_val_batch = tf.argmax(y_val_batch, axis=-1)
-    #         y_true = np.append(y_true, y_val_batch)
-    #         y_pred = np.append(y_pred, predictions)
-    #         loss_values.append(val_loss)
-    #
-    #     measures, each_classes = cal_metrics(y_true=y_true, y_pred=y_pred)
-    #
-    #     # 打印每一个类别的指标
-    #     classes_val_str = ''
-    #     for k, v in each_classes.items():
-    #         if k in reverse_classes:
-    #             classes_val_str += ('\n' + reverse_classes[k] + ': ' + str(each_classes[k]))
-    #     logger.info(classes_val_str)
-    #     # 打印损失函数
-    #     val_res_str = 'loss: %.3f ' % np.mean(loss_values)
-    #     for k, v in measures.items():
-    #         val_res_str += (k + ': %.3f ' % measures[k])
-    #
-    #     time_span = (time.time() - start_time) / 60
-    #
-    #     logger.info('time consumption:%.2f(min), %s' % (time_span, val_res_str))
-    #     if measures['f1'] > best_f1_val:
-    #         unprocessed = 0
-    #         best_f1_val = measures['f1']
-    #         best_at_epoch = i + 1
-    #         checkpoint_manager.save()
-    #         logger.info('saved the new best model with f1: %.3f' % best_f1_val)
-    #     else:
-    #         unprocessed += 1
-    #
-    #     if is_early_stop:
-    #         if unprocessed >= patient:
-    #             logger.info('early stopped, no progress obtained within {} epochs'.format(patient))
-    #             logger.info('overall best f1 is {} at {} epoch'.format(best_f1_val, best_at_epoch))
-    #             logger.info('total training time consumption: %.3f(min)' % ((time.time() - very_start_time) / 60))
-    #             return
-    # logger.info('overall best f1 is {} at {} epoch'.format(best_f1_val, best_at_epoch))
-    # logger.info('total training time consumption: %.3f(min)' % ((time.time() - very_start_time) / 60))
+                if classifier_config['use_focal_loss']:
+                    loss_vec = loss_obj.call(y_true=y_train_batch, y_pred=logits)
+                else:
+                    loss_vec = tf.keras.losses.categorical_crossentropy(y_true=y_train_batch, y_pred=logits)
+                loss = tf.reduce_mean(loss_vec)
+            # 定义好参加梯度的参数
+            gradients = tape.gradient(loss, model.trainable_variables)
+            # 反向传播，自动微分计算
+            optimizer.apply_gradients(zip(gradients, model.trainable_variables))
+            if step % print_per_batch == 0 and step != 0:
+                predictions = tf.argmax(logits, axis=-1).numpy()
+                y_train_batch = tf.argmax(y_train_batch, axis=-1).numpy()
+                measures, _ = cal_metrics(y_true=y_train_batch, y_pred=predictions)
+                res_str = ''
+                for k, v in measures.items():
+                    res_str += (k + ': %.3f ' % v)
+                logger.info('training batch: %5d, loss: %.5f, %s' % (step, loss, res_str))
+
+        # validation
+        logger.info('start evaluate engines...')
+        y_true, y_pred = np.array([]), np.array([])
+        loss_values = []
+
+        for dev_batch in tqdm(dev_dataset.batch(batch_size)):
+            X_val_batch, y_val_batch = dev_batch
+            logits = model.call(X_val_batch)
+            val_loss_vec = tf.keras.losses.categorical_crossentropy(y_true=y_val_batch, y_pred=logits)
+            val_loss = tf.reduce_mean(val_loss_vec)
+            predictions = tf.argmax(logits, axis=-1)
+            y_val_batch = tf.argmax(y_val_batch, axis=-1)
+            y_true = np.append(y_true, y_val_batch)
+            y_pred = np.append(y_pred, predictions)
+            loss_values.append(val_loss)
+
+        measures, each_classes = cal_metrics(y_true=y_true, y_pred=y_pred)
+
+        # 打印每一个类别的指标
+        classes_val_str = ''
+        for k, v in each_classes.items():
+            if k in reverse_classes:
+                classes_val_str += ('\n' + reverse_classes[k] + ': ' + str(each_classes[k]))
+        logger.info(classes_val_str)
+        # 打印损失函数
+        val_res_str = 'loss: %.3f ' % np.mean(loss_values)
+        for k, v in measures.items():
+            val_res_str += (k + ': %.3f ' % measures[k])
+
+        time_span = (time.time() - start_time) / 60
+
+        logger.info('time consumption:%.2f(min), %s' % (time_span, val_res_str))
+        if measures['f1'] > best_f1_val:
+            unprocessed = 0
+            best_f1_val = measures['f1']
+            best_at_epoch = i + 1
+            checkpoint_manager.save()
+            logger.info('saved the new best model with f1: %.3f' % best_f1_val)
+        else:
+            unprocessed += 1
+
+        if is_early_stop:
+            if unprocessed >= patient:
+                logger.info('early stopped, no progress obtained within {} epochs'.format(patient))
+                logger.info('overall best f1 is {} at {} epoch'.format(best_f1_val, best_at_epoch))
+                logger.info('total training time consumption: %.3f(min)' % ((time.time() - very_start_time) / 60))
+                return
+    logger.info('overall best f1 is {} at {} epoch'.format(best_f1_val, best_at_epoch))
+    logger.info('total training time consumption: %.3f(min)' % ((time.time() - very_start_time) / 60))

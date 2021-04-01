@@ -19,7 +19,6 @@ if __name__ == '__main__':
         logger.info(json.dumps(classifier_config, indent=2))
         data_manage = DataManager(logger)
         logger.info('mode: train_classifier')
-        logger.info('model: {}'.format(classifier_config['classifier']))
         train(data_manage, logger)
     # # 测试分类
     # elif mode == 'interactive_predict':
