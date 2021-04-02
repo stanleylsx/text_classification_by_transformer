@@ -129,7 +129,7 @@ class DataManager:
                     word_tokens.append(self.word_token2id[self.UNKNOWN])
             X.append(word_tokens)
             y.append(label)
-        return np.array(X, dtype=np.float32), np.array(y, dtype=np.float32)
+        return np.array(X), np.array(y)
 
     def get_dataset(self, df, step=None):
         """
@@ -137,8 +137,6 @@ class DataManager:
         """
         df = df.loc[df.label.isin(self.class_list)]
         df['label'] = df.label.map(lambda x: self.class_id[x])
-        # shuffle
-        df = df.sample(frac=1)
         # convert the data in matrix
         if step == 'train' and not os.path.isfile(self.token_file):
             self.word_token2id, self.id2word_token = self.load_vocab(df['sentence'])

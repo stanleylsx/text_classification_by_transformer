@@ -40,7 +40,7 @@ classifier_config = {
     'is_early_stop': True,
     'patient': 8,
     'batch_size': 64,
-    'max_sequence_length': 150,
+    'max_sequence_length': 20,
     # Encoder的个数
     'encoder_num': 2,
     # 遗忘率
@@ -48,7 +48,7 @@ classifier_config = {
     # 多头注意力的个数
     'head_num': 5,
     # 隐藏层维度
-    'hidden_dim': 300,
+    'hidden_dim': 1024,
     # 若为二分类则使用binary
     # 多分类使用micro或macro
     'metrics_average': 'binary',
