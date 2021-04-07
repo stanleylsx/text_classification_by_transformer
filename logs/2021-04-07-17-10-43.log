@@ -1,0 +1,698 @@
+2021-04-07 17:10:43
+{
+  "train_file": "data/train_data.csv",
+  "dev_file": "data/val_data.csv",
+  "embedding_dim": 240,
+  "token_file": "data/token2id",
+  "classes": {
+    "\u4f53\u80b2": 0,
+    "\u623f\u4ea7": 1,
+    "\u8d22\u7ecf": 2,
+    "\u79d1\u6280": 3,
+    "\u65f6\u653f": 4,
+    "\u65f6\u5c1a": 5,
+    "\u6e38\u620f": 6,
+    "\u6559\u80b2": 7,
+    "\u5a31\u4e50": 8,
+    "\u5bb6\u5c45": 9
+  },
+  "stop_words": "data/w2v_data/stop_words.txt",
+  "checkpoints_dir": "checkpoints/transformer",
+  "checkpoint_name": "model",
+  "token_level": "word",
+  "learning_rate": 0.001,
+  "epoch": 30,
+  "max_to_keep": 1,
+  "print_per_batch": 20,
+  "is_early_stop": true,
+  "patient": 8,
+  "batch_size": 64,
+  "max_sequence_length": 100,
+  "encoder_num": 1,
+  "dropout_rate": 0.25,
+  "head_num": 12,
+  "hidden_dim": 2048,
+  "metrics_average": "micro",
+  "use_focal_loss": false
+}
+dataManager initialed...
+mode: train_classifier
+loading data...
+loading data...
+++++++++++++++++++++training starting++++++++++++++++++++
+epoch:1/30
+training batch:    20, loss: 2.29628, precision: 0.094 recall: 0.094 f1: 0.094 
+training batch:    40, loss: 2.29924, precision: 0.109 recall: 0.109 f1: 0.109 
+training batch:    60, loss: 2.27614, precision: 0.094 recall: 0.094 f1: 0.094 
+training batch:    80, loss: 2.25574, precision: 0.188 recall: 0.188 f1: 0.188 
+training batch:   100, loss: 2.21740, precision: 0.203 recall: 0.203 f1: 0.203 
+training batch:   120, loss: 2.23292, precision: 0.266 recall: 0.266 f1: 0.266 
+training batch:   140, loss: 2.16295, precision: 0.422 recall: 0.422 f1: 0.422 
+start evaluate engines...
+
+体育: {'precision': 0.7515923566878981, 'recall': 0.944, 'f1-score': 0.8368794326241135, 'support': 500}
+房产: {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 500}
+财经: {'precision': 1.0, 'recall': 0.482, 'f1-score': 0.650472334682861, 'support': 500}
+科技: {'precision': 0.9916492693110647, 'recall': 0.95, 'f1-score': 0.9703779366700716, 'support': 500}
+时政: {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 500}
+时尚: {'precision': 0.5241596638655462, 'recall': 0.998, 'f1-score': 0.6873278236914601, 'support': 500}
+游戏: {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 500}
+教育: {'precision': 1.0, 'recall': 0.002, 'f1-score': 0.003992015968063872, 'support': 500}
+娱乐: {'precision': 0.1771026306039274, 'recall': 0.956, 'f1-score': 0.29884338855892467, 'support': 500}
+家居: {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 500}
+time consumption:3.04(min), loss: 2.118 precision: 0.433 recall: 0.433 f1: 0.433 
+saved the new best model with f1: 0.433
+epoch:2/30
+training batch:    20, loss: 2.14267, precision: 0.281 recall: 0.281 f1: 0.281 
+training batch:    40, loss: 2.10933, precision: 0.438 recall: 0.438 f1: 0.438 
+training batch:    60, loss: 2.05607, precision: 0.547 recall: 0.547 f1: 0.547 
+training batch:    80, loss: 1.98646, precision: 0.516 recall: 0.516 f1: 0.516 
+training batch:   100, loss: 1.95320, precision: 0.688 recall: 0.688 f1: 0.688 
+training batch:   120, loss: 1.80277, precision: 0.781 recall: 0.781 f1: 0.781 
+training batch:   140, loss: 1.95237, precision: 0.438 recall: 0.438 f1: 0.438 
+start evaluate engines...
+
+体育: {'precision': 0.9956236323851203, 'recall': 0.91, 'f1-score': 0.9508881922675027, 'support': 500}
+房产: {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 500}
+财经: {'precision': 0.9879518072289156, 'recall': 0.984, 'f1-score': 0.9859719438877755, 'support': 500}
+科技: {'precision': 0.6434108527131783, 'recall': 0.996, 'f1-score': 0.7817896389324961, 'support': 500}
+时政: {'precision': 0.9532019704433498, 'recall': 0.774, 'f1-score': 0.8543046357615895, 'support': 500}
+时尚: {'precision': 0.8591065292096219, 'recall': 1.0, 'f1-score': 0.9242144177449167, 'support': 500}
+游戏: {'precision': 1.0, 'recall': 0.652, 'f1-score': 0.7893462469733655, 'support': 500}
+教育: {'precision': 0.4334811529933481, 'recall': 0.782, 'f1-score': 0.557774607703281, 'support': 500}
+娱乐: {'precision': 0.44273339749759383, 'recall': 0.92, 'f1-score': 0.5977907732293697, 'support': 500}
+家居: {'precision': 1.0, 'recall': 0.032, 'f1-score': 0.06201550387596899, 'support': 500}
+time consumption:2.89(min), loss: 1.521 precision: 0.705 recall: 0.705 f1: 0.705 
+saved the new best model with f1: 0.705
+epoch:3/30
+training batch:    20, loss: 1.65005, precision: 0.734 recall: 0.734 f1: 0.734 
+training batch:    40, loss: 1.60486, precision: 0.656 recall: 0.656 f1: 0.656 
+training batch:    60, loss: 1.51328, precision: 0.859 recall: 0.859 f1: 0.859 
+training batch:    80, loss: 1.39701, precision: 0.844 recall: 0.844 f1: 0.844 
+training batch:   100, loss: 1.31422, precision: 0.766 recall: 0.766 f1: 0.766 
+training batch:   120, loss: 1.35343, precision: 0.781 recall: 0.781 f1: 0.781 
+training batch:   140, loss: 1.05485, precision: 0.859 recall: 0.859 f1: 0.859 
+start evaluate engines...
+
+体育: {'precision': 0.9670103092783505, 'recall': 0.938, 'f1-score': 0.9522842639593909, 'support': 500}
+房产: {'precision': 0.9527027027027027, 'recall': 0.282, 'f1-score': 0.4351851851851852, 'support': 500}
+财经: {'precision': 0.9878787878787879, 'recall': 0.978, 'f1-score': 0.9829145728643215, 'support': 500}
+科技: {'precision': 0.930188679245283, 'recall': 0.986, 'f1-score': 0.9572815533980582, 'support': 500}
+时政: {'precision': 0.9461883408071748, 'recall': 0.844, 'f1-score': 0.8921775898520085, 'support': 500}
+时尚: {'precision': 0.9208103130755064, 'recall': 1.0, 'f1-score': 0.9587727708533078, 'support': 500}
+游戏: {'precision': 0.9824945295404814, 'recall': 0.898, 'f1-score': 0.9383490073145246, 'support': 500}
+教育: {'precision': 0.7405940594059406, 'recall': 0.748, 'f1-score': 0.7442786069651741, 'support': 500}
+娱乐: {'precision': 0.4650485436893204, 'recall': 0.958, 'f1-score': 0.6261437908496732, 'support': 500}
+家居: {'precision': 0.9390581717451524, 'recall': 0.678, 'f1-score': 0.7874564459930314, 'support': 500}
+time consumption:2.89(min), loss: 0.848 precision: 0.831 recall: 0.831 f1: 0.831 
+saved the new best model with f1: 0.831
+epoch:4/30
+training batch:    20, loss: 0.98226, precision: 0.922 recall: 0.922 f1: 0.922 
+training batch:    40, loss: 0.82206, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:    60, loss: 0.85644, precision: 0.953 recall: 0.953 f1: 0.953 
+training batch:    80, loss: 0.73989, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:   100, loss: 0.77843, precision: 0.875 recall: 0.875 f1: 0.875 
+training batch:   120, loss: 0.78204, precision: 0.906 recall: 0.906 f1: 0.906 
+training batch:   140, loss: 0.58854, precision: 0.891 recall: 0.891 f1: 0.891 
+start evaluate engines...
+
+体育: {'precision': 1.0, 'recall': 0.916, 'f1-score': 0.9561586638830899, 'support': 500}
+房产: {'precision': 0.9290322580645162, 'recall': 0.576, 'f1-score': 0.7111111111111111, 'support': 500}
+财经: {'precision': 0.9879032258064516, 'recall': 0.98, 'f1-score': 0.9839357429718876, 'support': 500}
+科技: {'precision': 0.944337811900192, 'recall': 0.984, 'f1-score': 0.9637610186092067, 'support': 500}
+时政: {'precision': 0.8432055749128919, 'recall': 0.968, 'f1-score': 0.9013035381750466, 'support': 500}
+时尚: {'precision': 0.9276437847866419, 'recall': 1.0, 'f1-score': 0.9624639076034649, 'support': 500}
+游戏: {'precision': 0.8659611992945326, 'recall': 0.982, 'f1-score': 0.9203373945641987, 'support': 500}
+教育: {'precision': 0.851024208566108, 'recall': 0.914, 'f1-score': 0.8813886210221794, 'support': 500}
+娱乐: {'precision': 0.7825342465753424, 'recall': 0.914, 'f1-score': 0.8431734317343174, 'support': 500}
+家居: {'precision': 0.9541062801932367, 'recall': 0.79, 'f1-score': 0.8643326039387309, 'support': 500}
+time consumption:2.90(min), loss: 0.493 precision: 0.902 recall: 0.902 f1: 0.902 
+saved the new best model with f1: 0.902
+epoch:5/30
+training batch:    20, loss: 0.50814, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:    40, loss: 0.51122, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:    60, loss: 0.47087, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:    80, loss: 0.47585, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:   100, loss: 0.37824, precision: 0.953 recall: 0.953 f1: 0.953 
+training batch:   120, loss: 0.49954, precision: 0.906 recall: 0.906 f1: 0.906 
+training batch:   140, loss: 0.53178, precision: 0.938 recall: 0.938 f1: 0.938 
+start evaluate engines...
+
+体育: {'precision': 0.9978540772532188, 'recall': 0.93, 'f1-score': 0.9627329192546584, 'support': 500}
+房产: {'precision': 0.9014778325123153, 'recall': 0.732, 'f1-score': 0.8079470198675497, 'support': 500}
+财经: {'precision': 0.9858870967741935, 'recall': 0.978, 'f1-score': 0.9819277108433735, 'support': 500}
+科技: {'precision': 0.9646365422396856, 'recall': 0.982, 'f1-score': 0.9732408325074331, 'support': 500}
+时政: {'precision': 0.8382099827882961, 'recall': 0.974, 'f1-score': 0.9010175763182239, 'support': 500}
+时尚: {'precision': 0.9379699248120301, 'recall': 0.998, 'f1-score': 0.9670542635658915, 'support': 500}
+游戏: {'precision': 0.9454191033138402, 'recall': 0.97, 'f1-score': 0.9575518262586377, 'support': 500}
+教育: {'precision': 0.916015625, 'recall': 0.938, 'f1-score': 0.9268774703557312, 'support': 500}
+娱乐: {'precision': 0.819614711033275, 'recall': 0.936, 'f1-score': 0.8739495798319329, 'support': 500}
+家居: {'precision': 0.9782608695652174, 'recall': 0.81, 'f1-score': 0.8862144420131292, 'support': 500}
+time consumption:4.07(min), loss: 0.319 precision: 0.925 recall: 0.925 f1: 0.925 
+saved the new best model with f1: 0.925
+epoch:6/30
+training batch:    20, loss: 0.35663, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:    40, loss: 0.41557, precision: 0.922 recall: 0.922 f1: 0.922 
+training batch:    60, loss: 0.41023, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:    80, loss: 0.35499, precision: 0.922 recall: 0.922 f1: 0.922 
+training batch:   100, loss: 0.25792, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   120, loss: 0.24521, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:   140, loss: 0.33274, precision: 0.938 recall: 0.938 f1: 0.938 
+start evaluate engines...
+
+体育: {'precision': 0.9957894736842106, 'recall': 0.946, 'f1-score': 0.9702564102564103, 'support': 500}
+房产: {'precision': 0.9267139479905437, 'recall': 0.784, 'f1-score': 0.8494041170097509, 'support': 500}
+财经: {'precision': 0.9859437751004017, 'recall': 0.982, 'f1-score': 0.9839679358717435, 'support': 500}
+科技: {'precision': 0.9704724409448819, 'recall': 0.986, 'f1-score': 0.9781746031746031, 'support': 500}
+时政: {'precision': 0.8886827458256029, 'recall': 0.958, 'f1-score': 0.9220404234841193, 'support': 500}
+时尚: {'precision': 0.9538461538461539, 'recall': 0.992, 'f1-score': 0.9725490196078431, 'support': 500}
+游戏: {'precision': 0.9625246548323472, 'recall': 0.976, 'f1-score': 0.9692154915590864, 'support': 500}
+教育: {'precision': 0.9077212806026366, 'recall': 0.964, 'f1-score': 0.9350145489815712, 'support': 500}
+娱乐: {'precision': 0.8713235294117647, 'recall': 0.948, 'f1-score': 0.9080459770114943, 'support': 500}
+家居: {'precision': 0.9494505494505494, 'recall': 0.864, 'f1-score': 0.9047120418848167, 'support': 500}
+time consumption:2.99(min), loss: 0.231 precision: 0.940 recall: 0.940 f1: 0.940 
+saved the new best model with f1: 0.940
+epoch:7/30
+training batch:    20, loss: 0.20981, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:    40, loss: 0.30507, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:    60, loss: 0.16838, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.18025, precision: 0.953 recall: 0.953 f1: 0.953 
+training batch:   100, loss: 0.22772, precision: 0.953 recall: 0.953 f1: 0.953 
+training batch:   120, loss: 0.26901, precision: 0.922 recall: 0.922 f1: 0.922 
+training batch:   140, loss: 0.23774, precision: 0.984 recall: 0.984 f1: 0.984 
+start evaluate engines...
+
+体育: {'precision': 0.9957983193277311, 'recall': 0.948, 'f1-score': 0.9713114754098361, 'support': 500}
+房产: {'precision': 0.9073684210526316, 'recall': 0.862, 'f1-score': 0.8841025641025642, 'support': 500}
+财经: {'precision': 0.9879275653923542, 'recall': 0.982, 'f1-score': 0.9849548645937813, 'support': 500}
+科技: {'precision': 0.984, 'recall': 0.984, 'f1-score': 0.984, 'support': 500}
+时政: {'precision': 0.9041353383458647, 'recall': 0.962, 'f1-score': 0.932170542635659, 'support': 500}
+时尚: {'precision': 0.9430740037950665, 'recall': 0.994, 'f1-score': 0.9678675754625122, 'support': 500}
+游戏: {'precision': 0.9407265774378585, 'recall': 0.984, 'f1-score': 0.9618768328445747, 'support': 500}
+教育: {'precision': 0.9312977099236641, 'recall': 0.976, 'f1-score': 0.953125, 'support': 500}
+娱乐: {'precision': 0.9366336633663367, 'recall': 0.946, 'f1-score': 0.9412935323383085, 'support': 500}
+家居: {'precision': 0.9569160997732427, 'recall': 0.844, 'f1-score': 0.8969181721572795, 'support': 500}
+time consumption:3.05(min), loss: 0.192 precision: 0.948 recall: 0.948 f1: 0.948 
+saved the new best model with f1: 0.948
+epoch:8/30
+training batch:    20, loss: 0.18257, precision: 0.953 recall: 0.953 f1: 0.953 
+training batch:    40, loss: 0.21214, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:    60, loss: 0.14667, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:    80, loss: 0.25303, precision: 0.875 recall: 0.875 f1: 0.875 
+training batch:   100, loss: 0.10982, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   120, loss: 0.20352, precision: 0.953 recall: 0.953 f1: 0.953 
+training batch:   140, loss: 0.15426, precision: 0.953 recall: 0.953 f1: 0.953 
+start evaluate engines...
+
+体育: {'precision': 0.9958592132505176, 'recall': 0.962, 'f1-score': 0.9786368260427263, 'support': 500}
+房产: {'precision': 0.9100418410041841, 'recall': 0.87, 'f1-score': 0.8895705521472392, 'support': 500}
+财经: {'precision': 0.9879275653923542, 'recall': 0.982, 'f1-score': 0.9849548645937813, 'support': 500}
+科技: {'precision': 0.984, 'recall': 0.984, 'f1-score': 0.984, 'support': 500}
+时政: {'precision': 0.9130434782608695, 'recall': 0.966, 'f1-score': 0.9387755102040816, 'support': 500}
+时尚: {'precision': 0.9502868068833652, 'recall': 0.994, 'f1-score': 0.9716520039100685, 'support': 500}
+游戏: {'precision': 0.9461538461538461, 'recall': 0.984, 'f1-score': 0.9647058823529412, 'support': 500}
+教育: {'precision': 0.9265536723163842, 'recall': 0.984, 'f1-score': 0.9544131910766247, 'support': 500}
+娱乐: {'precision': 0.9424603174603174, 'recall': 0.95, 'f1-score': 0.946215139442231, 'support': 500}
+家居: {'precision': 0.9655172413793104, 'recall': 0.84, 'f1-score': 0.8983957219251336, 'support': 500}
+time consumption:3.10(min), loss: 0.171 precision: 0.952 recall: 0.952 f1: 0.952 
+saved the new best model with f1: 0.952
+epoch:9/30
+training batch:    20, loss: 0.09402, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.10472, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:    60, loss: 0.08051, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.15509, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   100, loss: 0.17100, precision: 0.953 recall: 0.953 f1: 0.953 
+training batch:   120, loss: 0.19283, precision: 0.938 recall: 0.938 f1: 0.938 
+training batch:   140, loss: 0.14752, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9958847736625515, 'recall': 0.968, 'f1-score': 0.9817444219066936, 'support': 500}
+房产: {'precision': 0.9135802469135802, 'recall': 0.888, 'f1-score': 0.9006085192697769, 'support': 500}
+财经: {'precision': 0.9899193548387096, 'recall': 0.982, 'f1-score': 0.9859437751004014, 'support': 500}
+科技: {'precision': 0.9919354838709677, 'recall': 0.984, 'f1-score': 0.9879518072289156, 'support': 500}
+时政: {'precision': 0.9344894026974951, 'recall': 0.97, 'f1-score': 0.9519136408243375, 'support': 500}
+时尚: {'precision': 0.9502868068833652, 'recall': 0.994, 'f1-score': 0.9716520039100685, 'support': 500}
+游戏: {'precision': 0.9553398058252427, 'recall': 0.984, 'f1-score': 0.9694581280788177, 'support': 500}
+教育: {'precision': 0.9427480916030534, 'recall': 0.988, 'f1-score': 0.96484375, 'support': 500}
+娱乐: {'precision': 0.9502982107355865, 'recall': 0.956, 'f1-score': 0.9531405782652045, 'support': 500}
+家居: {'precision': 0.9535398230088495, 'recall': 0.862, 'f1-score': 0.9054621848739496, 'support': 500}
+time consumption:2.96(min), loss: 0.149 precision: 0.958 recall: 0.958 f1: 0.958 
+saved the new best model with f1: 0.958
+epoch:10/30
+training batch:    20, loss: 0.11531, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.10866, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:    60, loss: 0.07314, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:    80, loss: 0.12079, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:   100, loss: 0.06672, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   120, loss: 0.08115, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   140, loss: 0.11684, precision: 0.984 recall: 0.984 f1: 0.984 
+start evaluate engines...
+
+体育: {'precision': 0.9958847736625515, 'recall': 0.968, 'f1-score': 0.9817444219066936, 'support': 500}
+房产: {'precision': 0.9461206896551724, 'recall': 0.878, 'f1-score': 0.9107883817427387, 'support': 500}
+财经: {'precision': 0.9899396378269618, 'recall': 0.984, 'f1-score': 0.9869608826479439, 'support': 500}
+科技: {'precision': 0.9919354838709677, 'recall': 0.984, 'f1-score': 0.9879518072289156, 'support': 500}
+时政: {'precision': 0.9172932330827067, 'recall': 0.976, 'f1-score': 0.945736434108527, 'support': 500}
+时尚: {'precision': 0.9594594594594594, 'recall': 0.994, 'f1-score': 0.9764243614931237, 'support': 500}
+游戏: {'precision': 0.9666011787819253, 'recall': 0.984, 'f1-score': 0.9752229930624381, 'support': 500}
+教育: {'precision': 0.9499036608863198, 'recall': 0.986, 'f1-score': 0.9676153091265947, 'support': 500}
+娱乐: {'precision': 0.9320388349514563, 'recall': 0.96, 'f1-score': 0.9458128078817734, 'support': 500}
+家居: {'precision': 0.9525862068965517, 'recall': 0.884, 'f1-score': 0.91701244813278, 'support': 500}
+time consumption:3.06(min), loss: 0.141 precision: 0.960 recall: 0.960 f1: 0.960 
+saved the new best model with f1: 0.960
+epoch:11/30
+training batch:    20, loss: 0.15749, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:    40, loss: 0.05258, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.04591, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.14216, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   100, loss: 0.06118, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   120, loss: 0.04287, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.08951, precision: 0.953 recall: 0.953 f1: 0.953 
+start evaluate engines...
+
+体育: {'precision': 0.9958932238193019, 'recall': 0.97, 'f1-score': 0.9827760891590679, 'support': 500}
+房产: {'precision': 0.9297520661157025, 'recall': 0.9, 'f1-score': 0.9146341463414634, 'support': 500}
+财经: {'precision': 0.9919354838709677, 'recall': 0.984, 'f1-score': 0.9879518072289156, 'support': 500}
+科技: {'precision': 0.9919354838709677, 'recall': 0.984, 'f1-score': 0.9879518072289156, 'support': 500}
+时政: {'precision': 0.9362934362934363, 'recall': 0.97, 'f1-score': 0.9528487229862476, 'support': 500}
+时尚: {'precision': 0.9613899613899614, 'recall': 0.996, 'f1-score': 0.9783889980353633, 'support': 500}
+游戏: {'precision': 0.9647749510763209, 'recall': 0.986, 'f1-score': 0.9752720079129575, 'support': 500}
+教育: {'precision': 0.9392789373814042, 'recall': 0.99, 'f1-score': 0.963972736124635, 'support': 500}
+娱乐: {'precision': 0.9506903353057199, 'recall': 0.964, 'f1-score': 0.9572989076464747, 'support': 500}
+家居: {'precision': 0.9649122807017544, 'recall': 0.88, 'f1-score': 0.9205020920502092, 'support': 500}
+time consumption:3.01(min), loss: 0.133 precision: 0.962 recall: 0.962 f1: 0.962 
+saved the new best model with f1: 0.962
+epoch:12/30
+training batch:    20, loss: 0.09831, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:    40, loss: 0.07589, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:    60, loss: 0.05215, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.03883, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   100, loss: 0.03521, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.07107, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   140, loss: 0.03373, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9959016393442623, 'recall': 0.972, 'f1-score': 0.9838056680161944, 'support': 500}
+房产: {'precision': 0.934020618556701, 'recall': 0.906, 'f1-score': 0.9197969543147209, 'support': 500}
+财经: {'precision': 0.9939393939393939, 'recall': 0.984, 'f1-score': 0.9889447236180904, 'support': 500}
+科技: {'precision': 0.9919354838709677, 'recall': 0.984, 'f1-score': 0.9879518072289156, 'support': 500}
+时政: {'precision': 0.9276190476190476, 'recall': 0.974, 'f1-score': 0.9502439024390243, 'support': 500}
+时尚: {'precision': 0.9632495164410058, 'recall': 0.996, 'f1-score': 0.9793510324483776, 'support': 500}
+游戏: {'precision': 0.9685658153241651, 'recall': 0.986, 'f1-score': 0.977205153617443, 'support': 500}
+教育: {'precision': 0.9446564885496184, 'recall': 0.99, 'f1-score': 0.9667968749999999, 'support': 500}
+娱乐: {'precision': 0.9525691699604744, 'recall': 0.964, 'f1-score': 0.9582504970178926, 'support': 500}
+家居: {'precision': 0.9692307692307692, 'recall': 0.882, 'f1-score': 0.9235602094240838, 'support': 500}
+time consumption:3.01(min), loss: 0.125 precision: 0.964 recall: 0.964 f1: 0.964 
+saved the new best model with f1: 0.964
+epoch:13/30
+training batch:    20, loss: 0.06870, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.05304, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.08453, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:    80, loss: 0.09069, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   100, loss: 0.12811, precision: 0.953 recall: 0.953 f1: 0.953 
+training batch:   120, loss: 0.03551, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.05660, precision: 0.984 recall: 0.984 f1: 0.984 
+start evaluate engines...
+
+体育: {'precision': 0.9959100204498977, 'recall': 0.974, 'f1-score': 0.9848331648129423, 'support': 500}
+房产: {'precision': 0.9284253578732107, 'recall': 0.908, 'f1-score': 0.9180990899898888, 'support': 500}
+财经: {'precision': 0.9939393939393939, 'recall': 0.984, 'f1-score': 0.9889447236180904, 'support': 500}
+科技: {'precision': 0.9919678714859438, 'recall': 0.988, 'f1-score': 0.9899799599198397, 'support': 500}
+时政: {'precision': 0.9365384615384615, 'recall': 0.974, 'f1-score': 0.9549019607843138, 'support': 500}
+时尚: {'precision': 0.9595375722543352, 'recall': 0.996, 'f1-score': 0.9774288518155054, 'support': 500}
+游戏: {'precision': 0.966796875, 'recall': 0.99, 'f1-score': 0.9782608695652174, 'support': 500}
+教育: {'precision': 0.9446564885496184, 'recall': 0.99, 'f1-score': 0.9667968749999999, 'support': 500}
+娱乐: {'precision': 0.9602385685884692, 'recall': 0.966, 'f1-score': 0.963110667996012, 'support': 500}
+家居: {'precision': 0.9711751662971175, 'recall': 0.876, 'f1-score': 0.9211356466876972, 'support': 500}
+time consumption:2.97(min), loss: 0.125 precision: 0.965 recall: 0.965 f1: 0.965 
+saved the new best model with f1: 0.965
+epoch:14/30
+training batch:    20, loss: 0.03080, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.09044, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:    60, loss: 0.05013, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.05782, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   100, loss: 0.03124, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.03181, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.01161, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979633401221996, 'recall': 0.98, 'f1-score': 0.9889001009081735, 'support': 500}
+房产: {'precision': 0.9360824742268041, 'recall': 0.908, 'f1-score': 0.9218274111675127, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9919678714859438, 'recall': 0.988, 'f1-score': 0.9899799599198397, 'support': 500}
+时政: {'precision': 0.9383429672447013, 'recall': 0.974, 'f1-score': 0.9558390578999019, 'support': 500}
+时尚: {'precision': 0.9595375722543352, 'recall': 0.996, 'f1-score': 0.9774288518155054, 'support': 500}
+游戏: {'precision': 0.9686888454011742, 'recall': 0.99, 'f1-score': 0.9792284866468842, 'support': 500}
+教育: {'precision': 0.9500959692898272, 'recall': 0.99, 'f1-score': 0.969637610186092, 'support': 500}
+娱乐: {'precision': 0.9565217391304348, 'recall': 0.968, 'f1-score': 0.9622266401590457, 'support': 500}
+家居: {'precision': 0.9713656387665198, 'recall': 0.882, 'f1-score': 0.9245283018867925, 'support': 500}
+time consumption:3.07(min), loss: 0.119 precision: 0.966 recall: 0.966 f1: 0.966 
+saved the new best model with f1: 0.966
+epoch:15/30
+training batch:    20, loss: 0.02245, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.03753, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.06871, precision: 0.969 recall: 0.969 f1: 0.969 
+training batch:    80, loss: 0.03264, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.06895, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   120, loss: 0.04703, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   140, loss: 0.03060, precision: 0.984 recall: 0.984 f1: 0.984 
+start evaluate engines...
+
+体育: {'precision': 0.9979633401221996, 'recall': 0.98, 'f1-score': 0.9889001009081735, 'support': 500}
+房产: {'precision': 0.9423868312757202, 'recall': 0.916, 'f1-score': 0.9290060851926978, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+时政: {'precision': 0.9401544401544402, 'recall': 0.974, 'f1-score': 0.956777996070727, 'support': 500}
+时尚: {'precision': 0.9632495164410058, 'recall': 0.996, 'f1-score': 0.9793510324483776, 'support': 500}
+游戏: {'precision': 0.9725490196078431, 'recall': 0.992, 'f1-score': 0.982178217821782, 'support': 500}
+教育: {'precision': 0.9500959692898272, 'recall': 0.99, 'f1-score': 0.969637610186092, 'support': 500}
+娱乐: {'precision': 0.9585798816568047, 'recall': 0.972, 'f1-score': 0.9652432969215491, 'support': 500}
+家居: {'precision': 0.9694323144104804, 'recall': 0.888, 'f1-score': 0.9269311064718163, 'support': 500}
+time consumption:2.77(min), loss: 0.112 precision: 0.968 recall: 0.968 f1: 0.968 
+saved the new best model with f1: 0.968
+epoch:16/30
+training batch:    20, loss: 0.05995, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:    40, loss: 0.01180, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.02031, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.04383, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   100, loss: 0.01173, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.03873, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   140, loss: 0.01775, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979633401221996, 'recall': 0.98, 'f1-score': 0.9889001009081735, 'support': 500}
+房产: {'precision': 0.9537815126050421, 'recall': 0.908, 'f1-score': 0.930327868852459, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+时政: {'precision': 0.9312977099236641, 'recall': 0.976, 'f1-score': 0.953125, 'support': 500}
+时尚: {'precision': 0.9651162790697675, 'recall': 0.996, 'f1-score': 0.9803149606299214, 'support': 500}
+游戏: {'precision': 0.9763779527559056, 'recall': 0.992, 'f1-score': 0.9841269841269842, 'support': 500}
+教育: {'precision': 0.9502868068833652, 'recall': 0.994, 'f1-score': 0.9716520039100685, 'support': 500}
+娱乐: {'precision': 0.9547244094488189, 'recall': 0.97, 'f1-score': 0.9623015873015873, 'support': 500}
+家居: {'precision': 0.9653679653679653, 'recall': 0.892, 'f1-score': 0.9272349272349272, 'support': 500}
+time consumption:2.76(min), loss: 0.113 precision: 0.968 recall: 0.968 f1: 0.968 
+epoch:17/30
+training batch:    20, loss: 0.01404, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.01589, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.02050, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.01851, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.01859, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.01609, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.03016, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979591836734694, 'recall': 0.978, 'f1-score': 0.9878787878787879, 'support': 500}
+房产: {'precision': 0.9295774647887324, 'recall': 0.924, 'f1-score': 0.9267803410230692, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.993963782696177, 'recall': 0.988, 'f1-score': 0.9909729187562687, 'support': 500}
+时政: {'precision': 0.9420849420849421, 'recall': 0.976, 'f1-score': 0.9587426326129667, 'support': 500}
+时尚: {'precision': 0.965183752417795, 'recall': 0.998, 'f1-score': 0.9813176007866273, 'support': 500}
+游戏: {'precision': 0.9783037475345168, 'recall': 0.992, 'f1-score': 0.9851042701092353, 'support': 500}
+教育: {'precision': 0.9502868068833652, 'recall': 0.994, 'f1-score': 0.9716520039100685, 'support': 500}
+娱乐: {'precision': 0.9662027833001988, 'recall': 0.972, 'f1-score': 0.9690927218344965, 'support': 500}
+家居: {'precision': 0.9756637168141593, 'recall': 0.882, 'f1-score': 0.9264705882352942, 'support': 500}
+time consumption:2.76(min), loss: 0.111 precision: 0.969 recall: 0.969 f1: 0.969 
+saved the new best model with f1: 0.969
+epoch:18/30
+training batch:    20, loss: 0.00989, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.01139, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.01549, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.02389, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.01740, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00765, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.01287, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979633401221996, 'recall': 0.98, 'f1-score': 0.9889001009081735, 'support': 500}
+房产: {'precision': 0.9522821576763485, 'recall': 0.918, 'f1-score': 0.934826883910387, 'support': 500}
+财经: {'precision': 0.9919517102615694, 'recall': 0.986, 'f1-score': 0.9889669007021062, 'support': 500}
+科技: {'precision': 0.9939759036144579, 'recall': 0.99, 'f1-score': 0.9919839679358716, 'support': 500}
+时政: {'precision': 0.9383429672447013, 'recall': 0.974, 'f1-score': 0.9558390578999019, 'support': 500}
+时尚: {'precision': 0.9633204633204633, 'recall': 0.998, 'f1-score': 0.980353634577603, 'support': 500}
+游戏: {'precision': 0.9783037475345168, 'recall': 0.992, 'f1-score': 0.9851042701092353, 'support': 500}
+教育: {'precision': 0.9502868068833652, 'recall': 0.994, 'f1-score': 0.9716520039100685, 'support': 500}
+娱乐: {'precision': 0.9681274900398407, 'recall': 0.972, 'f1-score': 0.9700598802395209, 'support': 500}
+家居: {'precision': 0.9676025917926566, 'recall': 0.896, 'f1-score': 0.9304257528556594, 'support': 500}
+time consumption:2.75(min), loss: 0.111 precision: 0.970 recall: 0.970 f1: 0.970 
+saved the new best model with f1: 0.970
+epoch:19/30
+training batch:    20, loss: 0.01046, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.01768, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.01117, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.01310, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.03084, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:   120, loss: 0.01634, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.01431, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979550102249489, 'recall': 0.976, 'f1-score': 0.98685540950455, 'support': 500}
+房产: {'precision': 0.9447852760736196, 'recall': 0.924, 'f1-score': 0.9342770475227502, 'support': 500}
+财经: {'precision': 0.9919517102615694, 'recall': 0.986, 'f1-score': 0.9889669007021062, 'support': 500}
+科技: {'precision': 0.9959677419354839, 'recall': 0.988, 'f1-score': 0.9919678714859438, 'support': 500}
+时政: {'precision': 0.9473684210526315, 'recall': 0.972, 'f1-score': 0.9595261599210266, 'support': 500}
+时尚: {'precision': 0.9670542635658915, 'recall': 0.998, 'f1-score': 0.982283464566929, 'support': 500}
+游戏: {'precision': 0.9783037475345168, 'recall': 0.992, 'f1-score': 0.9851042701092353, 'support': 500}
+教育: {'precision': 0.9468690702087287, 'recall': 0.998, 'f1-score': 0.9717624148003894, 'support': 500}
+娱乐: {'precision': 0.9643564356435643, 'recall': 0.974, 'f1-score': 0.9691542288557214, 'support': 500}
+家居: {'precision': 0.9696312364425163, 'recall': 0.894, 'f1-score': 0.9302809573361083, 'support': 500}
+time consumption:2.76(min), loss: 0.110 precision: 0.970 recall: 0.970 f1: 0.970 
+saved the new best model with f1: 0.970
+epoch:20/30
+training batch:    20, loss: 0.01390, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.00974, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00958, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.01531, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.01097, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.02466, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.01045, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979633401221996, 'recall': 0.98, 'f1-score': 0.9889001009081735, 'support': 500}
+房产: {'precision': 0.9410569105691057, 'recall': 0.926, 'f1-score': 0.9334677419354839, 'support': 500}
+财经: {'precision': 0.9919517102615694, 'recall': 0.986, 'f1-score': 0.9889669007021062, 'support': 500}
+科技: {'precision': 0.9959758551307847, 'recall': 0.99, 'f1-score': 0.9929789368104314, 'support': 500}
+时政: {'precision': 0.945631067961165, 'recall': 0.974, 'f1-score': 0.9596059113300492, 'support': 500}
+时尚: {'precision': 0.965183752417795, 'recall': 0.998, 'f1-score': 0.9813176007866273, 'support': 500}
+游戏: {'precision': 0.9783037475345168, 'recall': 0.992, 'f1-score': 0.9851042701092353, 'support': 500}
+教育: {'precision': 0.9521988527724665, 'recall': 0.996, 'f1-score': 0.9736070381231671, 'support': 500}
+娱乐: {'precision': 0.9606299212598425, 'recall': 0.976, 'f1-score': 0.9682539682539683, 'support': 500}
+家居: {'precision': 0.977924944812362, 'recall': 0.886, 'f1-score': 0.9296956977964322, 'support': 500}
+time consumption:2.76(min), loss: 0.110 precision: 0.970 recall: 0.970 f1: 0.970 
+saved the new best model with f1: 0.970
+epoch:21/30
+training batch:    20, loss: 0.02020, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.01401, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00620, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.01268, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00838, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00545, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00979, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979633401221996, 'recall': 0.98, 'f1-score': 0.9889001009081735, 'support': 500}
+房产: {'precision': 0.9522821576763485, 'recall': 0.918, 'f1-score': 0.934826883910387, 'support': 500}
+财经: {'precision': 0.9919517102615694, 'recall': 0.986, 'f1-score': 0.9889669007021062, 'support': 500}
+科技: {'precision': 0.9959677419354839, 'recall': 0.988, 'f1-score': 0.9919678714859438, 'support': 500}
+时政: {'precision': 0.9437984496124031, 'recall': 0.974, 'f1-score': 0.9586614173228346, 'support': 500}
+时尚: {'precision': 0.9689320388349515, 'recall': 0.998, 'f1-score': 0.9832512315270935, 'support': 500}
+游戏: {'precision': 0.9783037475345168, 'recall': 0.992, 'f1-score': 0.9851042701092353, 'support': 500}
+教育: {'precision': 0.9540229885057471, 'recall': 0.996, 'f1-score': 0.974559686888454, 'support': 500}
+娱乐: {'precision': 0.9606299212598425, 'recall': 0.976, 'f1-score': 0.9682539682539683, 'support': 500}
+家居: {'precision': 0.9635193133047211, 'recall': 0.898, 'f1-score': 0.9296066252587991, 'support': 500}
+time consumption:2.76(min), loss: 0.108 precision: 0.971 recall: 0.971 f1: 0.971 
+saved the new best model with f1: 0.971
+epoch:22/30
+training batch:    20, loss: 0.02620, precision: 0.984 recall: 0.984 f1: 0.984 
+training batch:    40, loss: 0.01799, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.01836, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.01135, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00849, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00545, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00420, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979633401221996, 'recall': 0.98, 'f1-score': 0.9889001009081735, 'support': 500}
+房产: {'precision': 0.9432048681541582, 'recall': 0.93, 'f1-score': 0.9365558912386707, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9959677419354839, 'recall': 0.988, 'f1-score': 0.9919678714859438, 'support': 500}
+时政: {'precision': 0.9475728155339805, 'recall': 0.976, 'f1-score': 0.961576354679803, 'support': 500}
+时尚: {'precision': 0.9708171206225681, 'recall': 0.998, 'f1-score': 0.9842209072978304, 'support': 500}
+游戏: {'precision': 0.9783037475345168, 'recall': 0.992, 'f1-score': 0.9851042701092353, 'support': 500}
+教育: {'precision': 0.9541108986615678, 'recall': 0.998, 'f1-score': 0.9755620723362659, 'support': 500}
+娱乐: {'precision': 0.9663366336633663, 'recall': 0.976, 'f1-score': 0.9711442786069652, 'support': 500}
+家居: {'precision': 0.9717391304347827, 'recall': 0.894, 'f1-score': 0.9312500000000001, 'support': 500}
+time consumption:2.76(min), loss: 0.107 precision: 0.972 recall: 0.972 f1: 0.972 
+saved the new best model with f1: 0.972
+epoch:23/30
+training batch:    20, loss: 0.00580, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.00795, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00568, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.01081, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00941, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00785, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00570, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979716024340771, 'recall': 0.984, 'f1-score': 0.9909365558912387, 'support': 500}
+房产: {'precision': 0.950920245398773, 'recall': 0.93, 'f1-score': 0.9403437815975733, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.993963782696177, 'recall': 0.988, 'f1-score': 0.9909729187562687, 'support': 500}
+时政: {'precision': 0.953125, 'recall': 0.976, 'f1-score': 0.9644268774703557, 'support': 500}
+时尚: {'precision': 0.9708171206225681, 'recall': 0.998, 'f1-score': 0.9842209072978304, 'support': 500}
+游戏: {'precision': 0.9783464566929134, 'recall': 0.994, 'f1-score': 0.9861111111111112, 'support': 500}
+教育: {'precision': 0.9541108986615678, 'recall': 0.998, 'f1-score': 0.9755620723362659, 'support': 500}
+娱乐: {'precision': 0.9663366336633663, 'recall': 0.976, 'f1-score': 0.9711442786069652, 'support': 500}
+家居: {'precision': 0.9697624190064795, 'recall': 0.898, 'f1-score': 0.9325025960539979, 'support': 500}
+time consumption:2.75(min), loss: 0.107 precision: 0.973 recall: 0.973 f1: 0.973 
+saved the new best model with f1: 0.973
+epoch:24/30
+training batch:    20, loss: 0.00833, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.00370, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.01370, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.00716, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00760, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00827, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.01030, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979716024340771, 'recall': 0.984, 'f1-score': 0.9909365558912387, 'support': 500}
+房产: {'precision': 0.9507186858316222, 'recall': 0.926, 'f1-score': 0.9381965552178319, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9919678714859438, 'recall': 0.988, 'f1-score': 0.9899799599198397, 'support': 500}
+时政: {'precision': 0.9475728155339805, 'recall': 0.976, 'f1-score': 0.961576354679803, 'support': 500}
+时尚: {'precision': 0.9708171206225681, 'recall': 0.998, 'f1-score': 0.9842209072978304, 'support': 500}
+游戏: {'precision': 0.9783464566929134, 'recall': 0.994, 'f1-score': 0.9861111111111112, 'support': 500}
+教育: {'precision': 0.9504761904761905, 'recall': 0.998, 'f1-score': 0.9736585365853659, 'support': 500}
+娱乐: {'precision': 0.9663366336633663, 'recall': 0.976, 'f1-score': 0.9711442786069652, 'support': 500}
+家居: {'precision': 0.9738562091503268, 'recall': 0.894, 'f1-score': 0.9322210636079249, 'support': 500}
+time consumption:2.77(min), loss: 0.110 precision: 0.972 recall: 0.972 f1: 0.972 
+epoch:25/30
+training batch:    20, loss: 0.00427, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.01132, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00495, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.00375, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.01161, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00792, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00327, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.9979716024340771, 'recall': 0.984, 'f1-score': 0.9909365558912387, 'support': 500}
+房产: {'precision': 0.9433198380566802, 'recall': 0.932, 'f1-score': 0.937625754527163, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9959677419354839, 'recall': 0.988, 'f1-score': 0.9919678714859438, 'support': 500}
+时政: {'precision': 0.9494163424124513, 'recall': 0.976, 'f1-score': 0.9625246548323471, 'support': 500}
+时尚: {'precision': 0.9708171206225681, 'recall': 0.998, 'f1-score': 0.9842209072978304, 'support': 500}
+游戏: {'precision': 0.9783464566929134, 'recall': 0.994, 'f1-score': 0.9861111111111112, 'support': 500}
+教育: {'precision': 0.9559386973180076, 'recall': 0.998, 'f1-score': 0.9765166340508805, 'support': 500}
+娱乐: {'precision': 0.9625246548323472, 'recall': 0.976, 'f1-score': 0.9692154915590864, 'support': 500}
+家居: {'precision': 0.9736842105263158, 'recall': 0.888, 'f1-score': 0.9288702928870293, 'support': 500}
+time consumption:2.77(min), loss: 0.108 precision: 0.972 recall: 0.972 f1: 0.972 
+epoch:26/30
+training batch:    20, loss: 0.00282, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.00501, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00529, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.01000, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00429, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00397, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00417, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.997979797979798, 'recall': 0.988, 'f1-score': 0.9929648241206029, 'support': 500}
+房产: {'precision': 0.9395161290322581, 'recall': 0.932, 'f1-score': 0.9357429718875503, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9959677419354839, 'recall': 0.988, 'f1-score': 0.9919678714859438, 'support': 500}
+时政: {'precision': 0.9587426326129665, 'recall': 0.976, 'f1-score': 0.9672943508424183, 'support': 500}
+时尚: {'precision': 0.9708171206225681, 'recall': 0.998, 'f1-score': 0.9842209072978304, 'support': 500}
+游戏: {'precision': 0.980276134122288, 'recall': 0.994, 'f1-score': 0.9870903674280039, 'support': 500}
+教育: {'precision': 0.9541108986615678, 'recall': 0.998, 'f1-score': 0.9755620723362659, 'support': 500}
+娱乐: {'precision': 0.9644268774703557, 'recall': 0.976, 'f1-score': 0.970178926441352, 'support': 500}
+家居: {'precision': 0.9716157205240175, 'recall': 0.89, 'f1-score': 0.9290187891440501, 'support': 500}
+time consumption:2.77(min), loss: 0.107 precision: 0.973 recall: 0.973 f1: 0.973 
+epoch:27/30
+training batch:    20, loss: 0.00390, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.00301, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00457, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.00802, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00283, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00392, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00391, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.997979797979798, 'recall': 0.988, 'f1-score': 0.9929648241206029, 'support': 500}
+房产: {'precision': 0.9414141414141414, 'recall': 0.932, 'f1-score': 0.9366834170854271, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9919839679358717, 'recall': 0.99, 'f1-score': 0.990990990990991, 'support': 500}
+时政: {'precision': 0.9606299212598425, 'recall': 0.976, 'f1-score': 0.9682539682539683, 'support': 500}
+时尚: {'precision': 0.9708171206225681, 'recall': 0.998, 'f1-score': 0.9842209072978304, 'support': 500}
+游戏: {'precision': 0.980276134122288, 'recall': 0.994, 'f1-score': 0.9870903674280039, 'support': 500}
+教育: {'precision': 0.9541108986615678, 'recall': 0.998, 'f1-score': 0.9755620723362659, 'support': 500}
+娱乐: {'precision': 0.9645669291338582, 'recall': 0.98, 'f1-score': 0.9722222222222221, 'support': 500}
+家居: {'precision': 0.9758241758241758, 'recall': 0.888, 'f1-score': 0.9298429319371727, 'support': 500}
+time consumption:2.77(min), loss: 0.109 precision: 0.973 recall: 0.973 f1: 0.973 
+saved the new best model with f1: 0.973
+epoch:28/30
+training batch:    20, loss: 0.00292, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.00211, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00295, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.00269, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00633, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00328, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00212, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.997979797979798, 'recall': 0.988, 'f1-score': 0.9929648241206029, 'support': 500}
+房产: {'precision': 0.9470468431771895, 'recall': 0.93, 'f1-score': 0.9384460141271443, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9919678714859438, 'recall': 0.988, 'f1-score': 0.9899799599198397, 'support': 500}
+时政: {'precision': 0.9549902152641878, 'recall': 0.976, 'f1-score': 0.9653808110781404, 'support': 500}
+时尚: {'precision': 0.9689320388349515, 'recall': 0.998, 'f1-score': 0.9832512315270935, 'support': 500}
+游戏: {'precision': 0.980276134122288, 'recall': 0.994, 'f1-score': 0.9870903674280039, 'support': 500}
+教育: {'precision': 0.9540229885057471, 'recall': 0.996, 'f1-score': 0.974559686888454, 'support': 500}
+娱乐: {'precision': 0.9645669291338582, 'recall': 0.98, 'f1-score': 0.9722222222222221, 'support': 500}
+家居: {'precision': 0.973741794310722, 'recall': 0.89, 'f1-score': 0.9299895506792057, 'support': 500}
+time consumption:2.76(min), loss: 0.108 precision: 0.973 recall: 0.973 f1: 0.973 
+epoch:29/30
+training batch:    20, loss: 0.00565, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.00685, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00235, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.00254, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00321, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00342, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00329, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.997979797979798, 'recall': 0.988, 'f1-score': 0.9929648241206029, 'support': 500}
+房产: {'precision': 0.9471544715447154, 'recall': 0.932, 'f1-score': 0.9395161290322581, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9919678714859438, 'recall': 0.988, 'f1-score': 0.9899799599198397, 'support': 500}
+时政: {'precision': 0.9568627450980393, 'recall': 0.976, 'f1-score': 0.9663366336633663, 'support': 500}
+时尚: {'precision': 0.9708171206225681, 'recall': 0.998, 'f1-score': 0.9842209072978304, 'support': 500}
+游戏: {'precision': 0.980276134122288, 'recall': 0.994, 'f1-score': 0.9870903674280039, 'support': 500}
+教育: {'precision': 0.9541108986615678, 'recall': 0.998, 'f1-score': 0.9755620723362659, 'support': 500}
+娱乐: {'precision': 0.9664694280078896, 'recall': 0.98, 'f1-score': 0.9731876861966237, 'support': 500}
+家居: {'precision': 0.9737991266375546, 'recall': 0.892, 'f1-score': 0.9311064718162839, 'support': 500}
+time consumption:2.77(min), loss: 0.109 precision: 0.973 recall: 0.973 f1: 0.973 
+saved the new best model with f1: 0.973
+epoch:30/30
+training batch:    20, loss: 0.00469, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    40, loss: 0.00260, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    60, loss: 0.00251, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:    80, loss: 0.00443, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   100, loss: 0.00294, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   120, loss: 0.00522, precision: 1.000 recall: 1.000 f1: 1.000 
+training batch:   140, loss: 0.00200, precision: 1.000 recall: 1.000 f1: 1.000 
+start evaluate engines...
+
+体育: {'precision': 0.997979797979798, 'recall': 0.988, 'f1-score': 0.9929648241206029, 'support': 500}
+房产: {'precision': 0.9489795918367347, 'recall': 0.93, 'f1-score': 0.9393939393939393, 'support': 500}
+财经: {'precision': 0.9939516129032258, 'recall': 0.986, 'f1-score': 0.9899598393574297, 'support': 500}
+科技: {'precision': 0.9919839679358717, 'recall': 0.99, 'f1-score': 0.990990990990991, 'support': 500}
+时政: {'precision': 0.9512670565302144, 'recall': 0.976, 'f1-score': 0.9634748272458045, 'support': 500}
+时尚: {'precision': 0.9727095516569201, 'recall': 0.998, 'f1-score': 0.985192497532083, 'support': 500}
+游戏: {'precision': 0.980276134122288, 'recall': 0.994, 'f1-score': 0.9870903674280039, 'support': 500}
+教育: {'precision': 0.9541108986615678, 'recall': 0.998, 'f1-score': 0.9755620723362659, 'support': 500}
+娱乐: {'precision': 0.9644970414201184, 'recall': 0.978, 'f1-score': 0.971201588877855, 'support': 500}
+家居: {'precision': 0.975929978118162, 'recall': 0.892, 'f1-score': 0.9320794148380356, 'support': 500}
+time consumption:2.78(min), loss: 0.110 precision: 0.973 recall: 0.973 f1: 0.973 
+overall best f1 is 0.9732 at 29 epoch
+total training time consumption: 87.572(min)

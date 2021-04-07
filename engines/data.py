@@ -158,4 +158,4 @@ class DataManager:
                 word_tokens.append(self.word_token2id[word])
             else:
                 word_tokens.append(self.word_token2id[self.UNKNOWN])
-        return np.array([word_tokens], dtype=np.float32)
+        return np.array([word_tokens])

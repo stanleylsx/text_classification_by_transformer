@@ -1,35 +1,35 @@
 # -*- coding: utf-8 -*-
 # @Time : 2021/3/30 22:56
-# @Author : lishouxian
+# @Author : StanleyLsx
 # @Email : gzlishouxian@gmail.com
 # @File : __init__.py
 # @Software: PyCharm
 
 
 # [train_classifier, interactive_predict, save_model]
-mode = 'train_classifier'
+mode = 'interactive_predict'
 
 classifier_config = {
     # 训练数据集
     'train_file': 'data/train_data.csv',
     # 验证数据集
-    'dev_file': 'data/dev_data.csv',
+    'dev_file': 'data/val_data.csv',
     # 向量维度
-    'embedding_dim': 300,
+    'embedding_dim': 240,
     # 存放词表的地方
     'token_file': 'data/token2id',
     # 类别和对应的id
-    'classes': {'negative': 0, 'positive': 1},
+    'classes': {'体育': 0, '房产': 1, '财经': 2, '科技': 3, '时政': 4, '时尚': 5, '游戏': 6, '教育': 7, '娱乐': 8, '家居': 9},
     # 停用词(可为空)
     'stop_words': 'data/w2v_data/stop_words.txt',
     # 模型保存的文件夹
-    'checkpoints_dir': 'checkpoints/model',
+    'checkpoints_dir': 'checkpoints/transformer',
     # 模型保存的名字
     'checkpoint_name': 'model',
     # token粒度
     'token_level': 'word',
     # 学习率
-    'learning_rate': 0.005,
+    'learning_rate': 1e-3,
     # 训练epoch
     'epoch': 30,
     # 最多保存max_to_keep个模型
@@ -40,18 +40,18 @@ classifier_config = {
     'is_early_stop': True,
     'patient': 8,
     'batch_size': 64,
-    'max_sequence_length': 20,
+    'max_sequence_length': 100,
     # Encoder的个数
-    'encoder_num': 2,
+    'encoder_num': 1,
     # 遗忘率
-    'dropout_rate': 0.5,
+    'dropout_rate': 0.25,
     # 多头注意力的个数
-    'head_num': 5,
+    'head_num': 12,
     # 隐藏层维度
-    'hidden_dim': 1024,
+    'hidden_dim': 2048,
     # 若为二分类则使用binary
     # 多分类使用micro或macro
-    'metrics_average': 'binary',
+    'metrics_average': 'micro',
     # 类别样本比例失衡的时候可以考虑使用
     'use_focal_loss': False
 }
