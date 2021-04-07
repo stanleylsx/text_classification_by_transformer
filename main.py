@@ -26,7 +26,7 @@ if __name__ == '__main__':
         data_manage = DataManager(logger)
         logger.info('mode: predict_one')
         predictor = Predictor(data_manage, logger)
-        predictor.predict_one('2010年6月英语四级深度阅读答案(昂立)以下是2010年6月19日四级答案 深度阅读十五选十：47. incredibly48. replace49. reduced50. sense51. powering52. exceptions53. expand54. vast55. historic56. protect来源：昂立教育 王如卿')
+        predictor.predict_one('warm start')
         while True:
             logger.info('please input a sentence (enter [exit] to exit.)')
             sentence = input()
