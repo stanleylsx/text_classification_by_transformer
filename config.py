@@ -25,7 +25,7 @@ classifier_config = {
     # 模型保存的文件夹
     'checkpoints_dir': 'checkpoints/transformer',
     # 模型保存的名字
-    'checkpoint_name': 'model',
+    'checkpoint_name': 'tf-model',
     # token粒度
     'token_level': 'word',
     # 学习率
