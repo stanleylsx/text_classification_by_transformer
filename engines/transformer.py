@@ -75,7 +75,7 @@ class MultiHeadAttention:
 
     @tf.function
     def call(self, inputs, mask=None):
-        batch_size = inputs.shape[0]
+        batch_size = tf.shape(inputs)[0]
         query = self.W_Q(inputs)
         key = self.W_K(inputs)
         value = self.W_V(inputs)
@@ -137,7 +137,7 @@ class Transformer(tf.keras.Model, ABC):
         super(Transformer, self).__init__()
         dropout_rate = classifier_config['dropout_rate']
         encoder_num = classifier_config['encoder_num']
-        self.embedding = tf.keras.layers.Embedding(vocab_size + 1, embedding_dim, mask_zero=False)
+        self.embedding = tf.keras.layers.Embedding(vocab_size + 1, embedding_dim, mask_zero=True)
         self.positional_encoder = PositionalEncoding(embedding_dim, seq_length)
         self.encoders = [Encoder(embedding_dim, dropout_rate) for _ in range(encoder_num)]
         self.dense = tf.keras.layers.Dense(num_classes, activation='softmax')

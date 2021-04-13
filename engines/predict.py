@@ -50,5 +50,5 @@ class Predictor:
         # 保存pb格式的模型到本地
         tf.saved_model.save(self.model, self.checkpoints_dir,
                             signatures=self.model.call.get_concrete_function(
-                                tf.TensorSpec([None, self.seq_length], tf.float32, name='inputs')))
+                                tf.TensorSpec([None, self.seq_length], tf.int32, name='inputs')))
         self.logger.info('The transformer has been saved')

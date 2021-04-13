@@ -7,7 +7,7 @@
 
 
 # [train_classifier, interactive_predict, save_model]
-mode = 'interactive_predict'
+mode = 'train_classifier'
 
 classifier_config = {
     # 训练数据集
