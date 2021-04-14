@@ -11,7 +11,7 @@ from config import classifier_config
 from engines.utils.mask import create_padding_mask
 
 
-class PositionalEncoding:
+class PositionalEncoding(tf.keras.layers.Layer):
     """
     Args:
         embedding_dim: 模型的维度，论文默认是512
@@ -33,7 +33,7 @@ class PositionalEncoding:
         return position_embed
 
 
-class MultiHeadAttention:
+class MultiHeadAttention(tf.keras.layers.Layer):
     """
     多头注意力机制
     """
@@ -90,7 +90,7 @@ class MultiHeadAttention:
         return z
 
 
-class PositionWiseFeedForwardLayer:
+class PositionWiseFeedForwardLayer(tf.keras.layers.Layer):
     """
     FeedForward层
     """
@@ -107,7 +107,7 @@ class PositionWiseFeedForwardLayer:
         return output
 
 
-class Encoder:
+class Encoder(tf.keras.layers.Layer):
     def __init__(self, embedding_dim, dropout_rate):
         super(Encoder, self).__init__()
         self.attention = MultiHeadAttention(embedding_dim)
@@ -119,10 +119,10 @@ class Encoder:
 
     @tf.function
     def call(self, inputs, training, mask):
-        attention_outputs = self.attention.call(inputs, mask)
+        attention_outputs = self.attention(inputs, mask)
         outputs_1 = self.dropout_1(attention_outputs, training=training)
         outputs_1 = self.layer_norm_1(inputs + outputs_1)
-        ffn_output = self.feed_forward.call(outputs_1)
+        ffn_output = self.feed_forward(outputs_1)
         outputs_2 = self.dropout_2(ffn_output, training=training)
         outputs_2 = self.layer_norm_2(outputs_1 + outputs_2)
         return outputs_2
@@ -148,10 +148,10 @@ class Transformer(tf.keras.Model, ABC):
     def call(self, inputs, training=None):
         mask = create_padding_mask(inputs)
         embed_inputs = self.embedding(inputs)
-        output = self.positional_encoder.call(embed_inputs)
+        output = self.positional_encoder(embed_inputs)
         output = self.dropout(output, training=training)
         for encoder in self.encoders:
-            output = encoder.call(output, training, mask)
+            output = encoder(output, training, mask)
         output = self.avg_pool(output)
         output = self.dense(output)
         return output

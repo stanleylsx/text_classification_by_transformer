@@ -60,8 +60,10 @@ def train(data_manager, logger):
 
     # 载入模型
     model = Transformer(vocab_size, embedding_dim, seq_length, num_classes)
+    model.build(input_shape=(None, seq_length))
+    model.summary()
 
-    checkpoint = tf.train.Checkpoint(model=model)
+    checkpoint = tf.train.Checkpoint(model=model, optimizer=optimizer)
     checkpoint_manager = tf.train.CheckpointManager(
         checkpoint, directory=checkpoints_dir, checkpoint_name=checkpoint_name, max_to_keep=max_to_keep)
     checkpoint.restore(checkpoint_manager.latest_checkpoint)
@@ -77,7 +79,7 @@ def train(data_manager, logger):
         for step, batch in tqdm(train_dataset.shuffle(len(train_dataset)).batch(batch_size).enumerate()):
             X_train_batch, y_train_batch = batch
             with tf.GradientTape() as tape:
-                logits = model.call(X_train_batch, training=1)
+                logits = model(X_train_batch, training=1)
                 if classifier_config['use_focal_loss']:
                     loss_vec = loss_obj.call(y_true=y_train_batch, y_pred=logits)
                 else:
