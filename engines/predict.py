@@ -40,7 +40,7 @@ class Predictor:
         reverse_classes = {class_id: class_name for class_name, class_id in self.dataManager.class_id.items()}
         start_time = time.time()
         tokens = self.dataManager.prepare_single_sentence(sentence)
-        logits = self.model.call(inputs=tokens)
+        logits = self.model(inputs=tokens)
         prediction = tf.argmax(logits, axis=-1)
         prediction = prediction.numpy()[0]
         self.logger.info('predict time consumption: %.3f(ms)' % ((time.time() - start_time)*1000))

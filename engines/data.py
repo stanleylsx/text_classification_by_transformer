@@ -9,7 +9,7 @@ import tensorflow as tf
 import os
 import jieba
 from tqdm import tqdm
-from engines.utils.clean_data import filter_word
+from engines.utils.clean_data import filter_word, filter_char
 from config import classifier_config
 from collections import Counter
 
@@ -26,8 +26,8 @@ class DataManager:
         if not os.path.isfile(self.token_file):
             self.logger.info('vocab files not exist...')
         else:
-            self.word_token2id, self.id2word_token = self.load_vocab()
-            self.vocab_size = len(self.word_token2id)
+            self.token2id, self.id2token = self.load_vocab()
+            self.vocab_size = len(self.token2id)
 
         self.PADDING = '[PAD]'
         self.UNKNOWN = '[UNK]'
@@ -66,38 +66,48 @@ class DataManager:
         if not os.path.isfile(self.token_file):
             self.logger.info('vocab files not exist, building vocab...')
             return self.build_vocab(self.token_file, sentences)
-        word_token2id, id2word_token = {}, {}
+        token2id, id2token = {}, {}
         with open(self.token_file, 'r', encoding='utf-8') as infile:
             for row in infile:
                 row = row.strip()
-                word_token, word_token_id = row.split('\t')[0], int(row.split('\t')[1])
-                word_token2id[word_token] = word_token_id
-                id2word_token[word_token_id] = word_token
-        self.vocab_size = len(word_token2id)
-        return word_token2id, id2word_token
+                token, token_id = row.split('\t')[0], int(row.split('\t')[1])
+                token2id[token] = token_id
+                id2token[token_id] = token
+        self.vocab_size = len(token2id)
+        return token2id, id2token
 
     def build_vocab(self, token_file, sentences):
-        word_tokens = []
-        for sentence in tqdm(sentences):
-            words = self.processing_sentence(sentence, self.stop_words)
-            word_tokens.extend(words)
-        # 根据词频过滤一部分频率极低的词，不加入词表
-        count_dict = Counter(word_tokens)
-        word_tokens = [k for k, v in count_dict.items() if v > 1 and filter_word(k)]
-        word_token2id = dict(zip(word_tokens, range(1, len(word_tokens) + 1)))
-        id2word_token = dict(zip(range(1, len(word_tokens) + 1), word_tokens))
+        tokens = []
+        if self.token_level == 'word':
+            # 词粒度
+            for sentence in tqdm(sentences):
+                words = self.processing_sentence(sentence, self.stop_words)
+                tokens.extend(words)
+            # 根据词频过滤一部分频率极低的词/字，不加入词表
+            count_dict = Counter(tokens)
+            tokens = [k for k, v in count_dict.items() if v > 1 and filter_word(k)]
+        else:
+            # 字粒度
+            for sentence in tqdm(sentences):
+                chars = list(sentence)
+                tokens.extend(chars)
+            # 根据词频过滤一部分频率极低的词/字，不加入词表
+            count_dict = Counter(tokens)
+            tokens = [k for k, v in count_dict.items() if k != ' ' and filter_char(k)]
+        token2id = dict(zip(tokens, range(1, len(tokens) + 1)))
+        id2token = dict(zip(range(1, len(tokens) + 1), tokens))
         # 向生成的词表和标签表中加入[PAD]
-        id2word_token[0] = self.PADDING
-        word_token2id[self.PADDING] = 0
+        id2token[0] = self.PADDING
+        token2id[self.PADDING] = 0
         # 向生成的词表中加入[UNK]
-        id2word_token[len(id2word_token)] = self.UNKNOWN
-        word_token2id[self.UNKNOWN] = len(id2word_token)
+        id2token[len(id2token)] = self.UNKNOWN
+        token2id[self.UNKNOWN] = len(id2token)
         # 保存词表及标签表
         with open(token_file, 'w', encoding='utf-8') as outfile:
-            for idx in id2word_token:
-                outfile.write(id2word_token[idx] + '\t' + str(idx) + '\n')
-        self.vocab_size = len(word_token2id)
-        return word_token2id, id2word_token
+            for idx in id2token:
+                outfile.write(id2token[idx] + '\t' + str(idx) + '\n')
+        self.vocab_size = len(token2id)
+        return token2id, id2token
 
     def padding(self, sentence):
         """
@@ -118,16 +128,20 @@ class DataManager:
         self.logger.info('loading data...')
         X, y = [], []
         for record in tqdm(zip(sentences, labels)):
-            sentence = self.processing_sentence(record[0], self.stop_words)
-            sentence = self.padding(sentence)
+            if self.token_level == 'word':
+                sentence = self.processing_sentence(record[0], self.stop_words)
+                sentence = self.padding(sentence)
+            else:
+                sentence = list(record[0])
+                sentence = self.padding(sentence)
             label = tf.one_hot(record[1], depth=self.max_label_number)
-            word_tokens = []
-            for word in sentence:
-                if word in self.word_token2id:
-                    word_tokens.append(self.word_token2id[word])
+            tokens = []
+            for token in sentence:
+                if token in self.token2id:
+                    tokens.append(self.token2id[token])
                 else:
-                    word_tokens.append(self.word_token2id[self.UNKNOWN])
-            X.append(word_tokens)
+                    tokens.append(self.token2id[self.UNKNOWN])
+            X.append(tokens)
             y.append(label)
         return np.array(X), np.array(y)
 
@@ -139,7 +153,7 @@ class DataManager:
         df['label'] = df.label.map(lambda x: self.class_id[x])
         # convert the data in matrix
         if step == 'train' and not os.path.isfile(self.token_file):
-            self.word_token2id, self.id2word_token = self.load_vocab(df['sentence'])
+            self.token2id, self.id2token = self.load_vocab(df['sentence'])
         X, y = self.prepare_data(df['sentence'], df['label'])
         dataset = tf.data.Dataset.from_tensor_slices((X, y))
         return dataset
@@ -150,12 +164,16 @@ class DataManager:
         :param sentence:
         :return:
         """
-        sentence = self.processing_sentence(sentence, self.stop_words)
-        sentence = self.padding(sentence)
-        word_tokens = []
-        for word in sentence:
-            if word in self.word_token2id:
-                word_tokens.append(self.word_token2id[word])
+        tokens = []
+        if self.token_level == 'word':
+            sentence = self.processing_sentence(sentence, self.stop_words)
+            sentence = self.padding(sentence)
+        else:
+            sentence = list(sentence)
+            sentence = self.padding(sentence)
+        for token in sentence:
+            if token in self.token2id:
+                tokens.append(self.token2id[token])
             else:
-                word_tokens.append(self.word_token2id[self.UNKNOWN])
-        return np.array([word_tokens])
+                tokens.append(self.token2id[self.UNKNOWN])
+        return np.array([tokens])

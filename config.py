@@ -16,18 +16,18 @@ classifier_config = {
     'dev_file': 'data/news_data/val_data.csv',
     # 向量维度
     'embedding_dim': 240,
-    # 存放词表的地方
-    'token_file': 'data/news_data/token2id',
+    # 存放字/词表的地方
+    'token_file': 'data/news_data/char_token2id',
     # 类别和对应的id
     'classes': {'体育': 0, '房产': 1, '财经': 2, '科技': 3, '时政': 4, '时尚': 5, '游戏': 6, '教育': 7, '娱乐': 8, '家居': 9},
     # 停用词(可为空)
-    'stop_words': 'data/w2v_data/stop_words.txt',
+    'stop_words': 'data/news_data/stop_words.txt',
     # 模型保存的文件夹
     'checkpoints_dir': 'checkpoints/news_classification',
     # 模型保存的名字
     'checkpoint_name': 'tf-model',
     # token粒度
-    'token_level': 'word',
+    'token_level': 'char',
     # 学习率
     'learning_rate': 1e-3,
     # 训练epoch
