@@ -23,10 +23,12 @@ classifier_config = {
     # 停用词(可为空)
     'stop_words': 'data/news_data/stop_words.txt',
     # 模型保存的文件夹
-    'checkpoints_dir': 'checkpoints/news_classification',
+    'checkpoints_dir': 'checkpoints/char_news_classification',
     # 模型保存的名字
     'checkpoint_name': 'tf-model',
     # token粒度
+    # 词粒度:'word'
+    # 字粒度:'char'
     'token_level': 'char',
     # 学习率
     'learning_rate': 1e-3,
