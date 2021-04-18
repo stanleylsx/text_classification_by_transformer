@@ -1,4 +1,6 @@
 # Text Classification By Transformer
+  
+**公众号文章：[使用Transformer进行文本分类之原理及工程实现](https://mp.weixin.qq.com/s/hcUOH009GjIKs5lEqMqZQg)**
 
 此仓库是使用transformer模型进行文本分类的任务，项目基于Tensorflow2.3开发，配置参数之后，开箱即用。
 
