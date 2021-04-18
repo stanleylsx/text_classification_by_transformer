@@ -11,7 +11,9 @@
 ## 主要环境
 * python 3.7.10
 * **CPU:** tensorflow==2.3.0
-* **GPU:** tensorflow-gpu==2.3.0
+* **GPU:** tensorflow-gpu==2.3.0  
+
+其它环境见requirements.txt
 
 ## 数据集
 网络新闻数据集

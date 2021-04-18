@@ -29,6 +29,7 @@ class PositionalEncoding(tf.keras.layers.Layer):
 
     @tf.function
     def call(self, inputs):
+        # 在这里将词的embedding和位置embedding相加
         position_embed = inputs + self.pe
         return position_embed
 
