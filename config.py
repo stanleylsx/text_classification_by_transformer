@@ -9,6 +9,10 @@
 # [train_classifier, interactive_predict, save_model]
 mode = 'train_classifier'
 
+CUDA_VISIBLE_DEVICES = 0
+# int, -1:CPU, [0,]:GPU
+# coincides with tf.CUDA_VISIBLE_DEVICES
+
 classifier_config = {
     # 训练数据集
     'train_file': 'data/news_data/train_data.csv',
