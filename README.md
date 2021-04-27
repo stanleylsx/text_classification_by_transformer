@@ -96,3 +96,8 @@ mode = 'train_classifier'
 mode = 'interactive_predict'
 ```
 ![test](https://img-blog.csdnimg.cn/20210416144713956.png)
+
+## 公众号
+相关问题欢迎在公众号反馈：  
+
+![小贤算法屋](https://img-blog.csdnimg.cn/20210427094903895.jpg)
