@@ -105,7 +105,7 @@ def train(data_manager, logger):
 
         for dev_batch in tqdm(dev_dataset.batch(batch_size)):
             X_val_batch, y_val_batch = dev_batch
-            logits = model.call(X_val_batch)
+            logits = model(X_val_batch)
             val_loss_vec = tf.keras.losses.categorical_crossentropy(y_true=y_val_batch, y_pred=logits)
             val_loss = tf.reduce_mean(val_loss_vec)
             predictions = tf.argmax(logits, axis=-1)
